@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Salt Press</title>
+  <meta name="description" content="A small paper that files a new edition every hour." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="mast">
+    <div class="mast-left">
+      <p class="kicker" id="clock">—</p>
+      <a class="mark" href="#">Salt Press</a>
+    </div>
+    <nav class="mast-nav">
+      <button type="button" data-go="desk">The hour</button>
+      <button type="button" data-go="board">Public wall</button>
+      <button type="button" data-go="drawer">Your drawer</button>
+    </nav>
+    <div class="mast-right" id="authSlot"></div>
+  </header>
+
+  <main>
+    <section id="desk" class="panel hour-panel">
+      <p class="section-label">Filed this hour</p>
+      <h1 id="hourHeadline">Loading the desk…</h1>
+      <p class="lede" id="hourBody"></p>
+      <p class="meta" id="hourMeta"></p>
+    </section>
+
+    <section id="board" class="panel">
+      <div class="section-head">
+        <div>
+          <p class="section-label">Public wall</p>
+          <h2>Notes marked public</h2>
+        </div>
+      </div>
+      <div id="publicList" class="cards"></div>
+    </section>
+
+    <section id="drawer" class="panel drawer">
+      <div class="section-head">
+        <div>
+          <p class="section-label">Your drawer</p>
+          <h2>Write, save, choose what goes public</h2>
+        </div>
+      </div>
+      <div id="composerWrap"></div>
+      <div id="mineList" class="cards"></div>
+    </section>
+  </main>
+
+  <div class="modal" id="authModal" hidden>
+    <div class="modal-card">
+      <button class="close" type="button" id="closeAuth">×</button>
+      <p class="section-label">Account</p>
+      <h3 id="authTitle">Sign in</h3>
+      <form id="authForm">
+        <label>Email<input type="email" name="email" required autocomplete="email" /></label>
+        <label>Password<input type="password" name="password" required minlength="6" autocomplete="current-password" /></label>
+        <label class="handle-row" hidden>Handle
+          <input type="text" name="handle" minlength="2" maxlength="24" pattern="[a-z0-9_]+" placeholder="salt_desk" />
+        </label>
+        <p class="err" id="authErr"></p>
+        <button class="btn" type="submit">Continue</button>
+      </form>
+      <button class="linkish" type="button" id="toggleAuth">Need an account?</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
